@@ -72,24 +72,30 @@ public:
 
     void pop_back() {
         if (empty()) {return;} // std::vector UB
+        (m_arr + m_size - 1)->~T();
         --m_size;
-        (m_arr + m_size)->~T();
     }
 
-    void insert(const int index, const T& value) {
-        if (index >= m_size) {
+    void insert(size_t index, const T& value) {
+        if (index >= m_capacity) {
             reserve(index + 1);
+        }
+        if (index < m_size) {
+            for (size_t i = m_size; i >= index; --i) {
+                m_arr[i] = m_arr[i - 1];
+            }
         }
         m_arr[index] = value;
         ++m_size;
     }
 
-    void erase(const int index) {
+    void erase(size_t index) {
         if (index >= m_size) {return;} // std::vector : UB
         for(int i = index + 1; i < m_size; ++i) {
             m_arr[i - 1] = m_arr[i];
         }
-        ++m_size;
+        m_arr[m_size - 1].~T();
+        --m_size;
     }
 
     T& operator[](size_t index) {
