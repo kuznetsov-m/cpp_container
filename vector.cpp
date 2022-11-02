@@ -9,9 +9,13 @@ class Vector {
 
 public:
     ~Vector() {
+        for (size_t i = 0; i < m_size; ++i) {
+            T& item = m_arr[i];
+            item.~T();
+        }
+        delete[] reinterpret_cast<int8_t*>(m_arr);
         m_size = 0;
         m_capacity = 0;
-        delete[] m_arr;
     }
 
     size_t size() const noexcept {return m_size;}
@@ -60,7 +64,7 @@ public:
 
     void push_back(const T& value) {
         if (m_size == m_capacity) {
-            reserve(std::max(static_cast<size_t>(1), m_capacity * 2));
+            reserve(m_capacity == 0 ? 1 : m_capacity * 2);
         }
         m_arr[m_size] = value;
         ++m_size;
