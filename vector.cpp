@@ -1,5 +1,4 @@
-#include <vector>
-#include <iostream>
+#include <vector> // size_t
 
 template<typename T>
 class Vector {
