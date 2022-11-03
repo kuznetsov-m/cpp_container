@@ -56,7 +56,6 @@ void Vector<T>::clear() noexcept {
     }
     delete[] reinterpret_cast<int8_t*>(m_arr);
     m_size = 0;
-    // m_capacity = 0;
 }
 
 template<typename T>

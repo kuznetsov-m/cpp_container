@@ -11,6 +11,7 @@ FetchContent_MakeAvailable(gtest)
 add_executable(
     unit_tests  
     vector.cpp
+    vector_with_std.cpp
 )
 
 target_link_libraries(unit_tests
