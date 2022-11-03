@@ -34,12 +34,7 @@ public:
 
 template<typename T>
 Vector<T>::~Vector() {
-    for (size_t i = 0; i < m_size; ++i) {
-        T& item = m_arr[i];
-        item.~T();
-    }
-    delete[] reinterpret_cast<int8_t*>(m_arr);
-    m_size = 0;
+    clear();
     m_capacity = 0;
 }
 
@@ -51,8 +46,17 @@ size_t Vector<T>::capacity() const noexcept { return m_capacity; }
 
 template<typename T>
 void Vector<T>::clear() noexcept {
-    // FIXME:
+    if (m_size == 0) {
+        return;
+    }
+
+    for (size_t i = 0; i < m_size; ++i) {
+        T& item = m_arr[i];
+        item.~T();
+    }
+    delete[] reinterpret_cast<int8_t*>(m_arr);
     m_size = 0;
+    // m_capacity = 0;
 }
 
 template<typename T>
