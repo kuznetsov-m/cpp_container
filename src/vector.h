@@ -20,6 +20,7 @@ public:
 
     void push_back(const T& value);
     void pop_back();
+    void insert(size_t index, const T& value);
 };
 
 template<typename T>
@@ -103,4 +104,18 @@ void Vector<T>::pop_back() {
     if (empty()) {return;} // std::vector UB
     (m_arr + m_size - 1)->~T();
     --m_size;
+}
+
+template<typename T>
+void Vector<T>::insert(size_t index, const T& value) {
+    if (index >= m_capacity) {
+        reserve(index + 1);
+    }
+    if (index < m_size) {
+        for (size_t i = m_size; i >= index; --i) {
+            m_arr[i] = m_arr[i - 1];
+        }
+    }
+    m_arr[index] = value;
+    ++m_size;
 }
