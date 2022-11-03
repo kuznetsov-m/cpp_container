@@ -121,7 +121,7 @@ void Vector<T>::insert(size_t index, const T& value) {
         reserve(index + 1);
     }
     if (index < m_size) {
-        for (size_t i = m_size; i >= index; --i) {
+        for (size_t i = m_size; i > index; --i) {
             m_arr[i] = m_arr[i - 1];
         }
     }
