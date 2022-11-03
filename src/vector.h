@@ -1,7 +1,8 @@
 #pragma once
 
-#include <vector>  // size_t
-#include <cstdint> // int8_t
+#include <vector>    // size_t
+#include <cstdint>   // int8_t
+#include <stdexcept> // std::out_of_range
 
 template<typename T>
 class Vector {
