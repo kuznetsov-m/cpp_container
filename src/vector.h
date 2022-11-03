@@ -1,6 +1,7 @@
 #pragma once
 
-#include <vector> // size_t
+#include <vector>  // size_t
+#include <cstdint> // int8_t
 
 template<typename T>
 class Vector {
