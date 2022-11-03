@@ -22,6 +22,13 @@ public:
     void push_back(const T& value);
     void pop_back();
     void insert(size_t index, const T& value);
+    void erase(size_t index);
+
+    T& operator[](size_t index);
+    T& at(size_t index);
+
+    T front();
+    T back();
 };
 
 template<typename T>
@@ -120,3 +127,32 @@ void Vector<T>::insert(size_t index, const T& value) {
     m_arr[index] = value;
     ++m_size;
 }
+
+template<typename T>
+void Vector<T>::erase(size_t index) {
+    if (index >= m_size) {return;} // std::vector : UB
+    for(int i = index + 1; i < m_size; ++i) {
+        m_arr[i - 1] = m_arr[i];
+    }
+    m_arr[m_size - 1].~T();
+    --m_size;
+}
+
+template<typename T>
+T& Vector<T>::operator[](size_t index) {
+    return m_arr[index];
+}
+
+template<typename T>
+T& Vector<T>::at(size_t index) {
+    if (index >= m_size) {
+        throw std::out_of_range("out_of_range");
+    }
+    return operator[](index);
+}
+
+template<typename T>
+T Vector<T>::front() { return m_arr[0]; }
+
+template<typename T>
+T Vector<T>::back() { return m_arr[m_size - 1]; }
