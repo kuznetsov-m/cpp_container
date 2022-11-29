@@ -12,6 +12,8 @@ add_executable(
     unit_tests  
     vector.cpp
     vector_with_std.cpp
+    test_object.h
+    test_object.cpp
 )
 
 target_link_libraries(unit_tests
