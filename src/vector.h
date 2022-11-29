@@ -107,7 +107,8 @@ void Vector<T>::push_back(const T& value) {
     if (m_size == m_capacity) {
         reserve(m_capacity == 0 ? 1 : m_capacity * 2);
     }
-    m_arr[m_size] = value;
+
+    new (m_arr + m_size) T(value);
     ++m_size;
 }
 
