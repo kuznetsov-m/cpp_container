@@ -25,6 +25,7 @@ public:
     void pop_back();
     void insert(size_t index, const T& value);
     void erase(size_t index);
+    void swap(T& other);
 
     T& operator[](size_t index);
     T& at(size_t index);
@@ -152,6 +153,13 @@ void Vector<T>::erase(size_t index) {
     }
     m_arr[m_size - 1].~T();
     --m_size;
+}
+
+template<typename T>
+void Vector<T>::swap(T& other) {
+    std::swap(m_arr, other.m_arr);
+    std::swap(m_size, other.m_size);
+    std::swap(m_capacity, other.m_capacity);
 }
 
 template<typename T>
