@@ -145,6 +145,22 @@ TEST(vector, erase_4) {
     ASSERT_EQ(*v.at(2).m_value, 2);
 }
 
+TEST(vector, swap) {
+    const int count = 5;
+    
+    Vector<D> v1;
+    for (size_t i = 0; i < count; ++i) {
+        v1.push_back(i);
+    }
+
+    Vector<D> v2;
+    v1.swap(v2);
+
+    ASSERT_EQ(v1.size(), 0);
+    ASSERT_EQ(v1.capacity(), 0);
+    ASSERT_EQ(v2.size(), count);
+}
+
 TEST(vector, pop_back_1) {
     Vector<D> v;
     v.pop_back();
