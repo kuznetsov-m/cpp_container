@@ -133,7 +133,7 @@ void Vector<T>::pop_back() {
 template<typename T>
 void Vector<T>::insert(size_t index, const T& value) {
     if (index >= m_capacity) {
-        reserve(index + 1);
+        reserve(m_capacity == 0 ? 1 : m_capacity * 2);
     }
     if (index < m_size) {
         for (size_t i = m_size; i > index; --i) {
