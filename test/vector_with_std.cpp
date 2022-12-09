@@ -19,7 +19,9 @@ TEST(vector_custom_vs_std, push_back) {
     }
     auto std_ctor_counter = D::get_ctor_counter();
     auto std_copy_ctor_counter = D::get_copy_ctor_counter();
-    auto std_operator_assignment_counter = D::get_operator_assignment_counter();
+    auto std_move_ctor_counter = D::get_move_ctor_counter();
+    auto std_copy_assignment_operator_counter = D::get_copy_assignment_operator_counter();
+    auto std_move_assignment_operator_counter = D::get_move_assignment_operator_counter();
     D::reset_counters();
 
     // custom:
@@ -30,14 +32,18 @@ TEST(vector_custom_vs_std, push_back) {
     }
     auto custom_ctor_counter = D::get_ctor_counter();
     auto custom_copy_ctor_counter = D::get_copy_ctor_counter();
-    auto custom_operator_assignment_counter = D::get_operator_assignment_counter();
+    auto custom_move_ctor_counter = D::get_move_ctor_counter();
+    auto custom_copy_assignment_operator_counter = D::get_copy_assignment_operator_counter();
+    auto custom_move_assignment_operator_counter = D::get_move_assignment_operator_counter();
 
     ASSERT_EQ(std_v.size(), custom_v.size());
     ASSERT_EQ(std_v.capacity(), custom_v.capacity());
 
     ASSERT_EQ(std_ctor_counter, custom_ctor_counter);
     ASSERT_EQ(std_copy_ctor_counter, custom_copy_ctor_counter);
-    ASSERT_EQ(std_operator_assignment_counter, custom_operator_assignment_counter);
+    ASSERT_EQ(std_move_ctor_counter, custom_move_ctor_counter);
+    ASSERT_EQ(std_copy_assignment_operator_counter, custom_copy_assignment_operator_counter);
+    ASSERT_EQ(std_move_assignment_operator_counter, custom_move_assignment_operator_counter);
 }
 
 TEST(vector_custom_vs_std, clear) {
