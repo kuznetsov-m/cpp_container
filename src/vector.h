@@ -21,6 +21,7 @@ public:
     void resize(size_t new_size, const T& value = T());
 
     void push_back(const T& value);
+    void push_back(T&& value);
     void pop_back();
     void insert(size_t index, const T& value);
     void erase(size_t index);
@@ -109,6 +110,16 @@ void Vector<T>::push_back(const T& value) {
     }
 
     new (m_arr + m_size) T(value);
+    ++m_size;
+}
+
+template<typename T>
+void Vector<T>::push_back(T&& value) {
+    if (m_size == m_capacity) {
+        reserve(m_capacity == 0 ? 1 : m_capacity * 2);
+    }
+
+    new (m_arr + m_size) T(std::move(value));
     ++m_size;
 }
 
