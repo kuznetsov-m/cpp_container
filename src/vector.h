@@ -157,7 +157,7 @@ T& Vector<T>::at(size_t index) {
 }
 
 template<typename T>
-T Vector<T>::front() { return m_arr[0]; }
+T Vector<T>::front() { return at(0); }
 
 template<typename T>
-T Vector<T>::back() { return m_arr[m_size - 1]; }
+T Vector<T>::back() { return at(m_size - 1); }
