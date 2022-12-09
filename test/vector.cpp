@@ -70,18 +70,38 @@ TEST(vector, push_back) {
 
 TEST(vector, front) {
     Vector<D> v;
-    D value(0);
-    v.push_back(value);
+    D d(0);
+    v.push_back(d);
     v.push_back(1);
-    ASSERT_EQ(*v.front().m_value, *value.m_value);
+    ASSERT_EQ(*(v.front().m_value), *(d.m_value));
+}
+
+TEST(vector, front_out_of_range) {
+    Vector<D> v;
+    try {
+        v.front();
+    }
+    catch (const std::out_of_range& e) {
+        ASSERT_EQ(strcmp(e.what(), "out_of_range"), 0);
+    }
 }
 
 TEST(vector, back) {
     Vector<D> v;
-    D value(1);
+    D d(1);
     v.push_back(0);
-    v.push_back(value);
-    ASSERT_EQ(*v.back().m_value, *(value.m_value));
+    v.push_back(d);
+    ASSERT_EQ(*(v.back().m_value), *(d.m_value));
+}
+
+TEST(vector, back_out_of_range) {
+    Vector<D> v;
+    try {
+        v.back();
+    }
+    catch (const std::out_of_range& e) {
+        ASSERT_EQ(strcmp(e.what(), "out_of_range"), 0);
+    }
 }
 
 TEST(vector, erase_1) {
